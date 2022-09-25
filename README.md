@@ -16,5 +16,5 @@ $ npm run bundle:dev
 ```bash
  $ cd <app location>
  $ docker build -t casmedia .
- $ docker compose up -d
+ $ docker compose up
 ```
