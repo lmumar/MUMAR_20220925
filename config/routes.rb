@@ -3,7 +3,6 @@
 Rails.application.routes.draw do
   get 'home/index'
   root 'home#index'
-  resources :home, only: %w[index]
 
   namespace 'api' do
     resources :videos, only: %w[index create]
