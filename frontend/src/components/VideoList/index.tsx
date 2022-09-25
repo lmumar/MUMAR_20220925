@@ -16,7 +16,7 @@ export default function VideoList() {
   return (
     <div className="container max-w-7xl flex items-center mx-auto mt-5">
       <div className="grid grid-flow-row grid-cols-4">
-        {videos.map((video: Playable) => <VideoCard video={video} key={video.id} />)}
+        {videos.map((video: VideoEntity) => <VideoCard video={video} key={video.id} />)}
       </div>
     </div>
   )

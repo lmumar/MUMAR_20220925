@@ -5,7 +5,7 @@ import React, {
 } from 'react'
 
 type Props = {
-  video: Playable
+  video: VideoEntity
 }
 
 export default function VideoCard({ video } : Props) {

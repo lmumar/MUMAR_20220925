@@ -1,7 +1,7 @@
 interface Window {
 }
 
-interface Playable {
+interface VideoEntity {
   id: number
   title: string
   category: string
