@@ -14,5 +14,5 @@ Rails.application.routes.draw do
     end
   end
 
-  # get '*path', to: 'home#index'
+  get 'videos/add', to: 'home#index'
 end
