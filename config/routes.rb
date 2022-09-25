@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'home/index'
   root 'home#index'
 
+  resources :video_thumbnails, only: %w[show]
+
   namespace 'api' do
     resources :videos, only: %w[index create]
 
@@ -12,5 +14,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get '*path', to: 'home#index'
+  # get '*path', to: 'home#index'
 end
