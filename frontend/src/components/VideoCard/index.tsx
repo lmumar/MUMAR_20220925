@@ -25,6 +25,7 @@ export default function VideoCard({ video } : Props) {
     <div className="max-w-[280px] bg-black rounded-lg border border-black shadow-md m-3 text-white">
       <div className="border w-[256px] mx-auto mt-3 rounded-lg border-black">
         <video
+          title={video.title}
           ref={videoElement}
           poster={`/video_thumbnails/${video.id}`}
           src={video.video_url}
