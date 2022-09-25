@@ -1,24 +1,19 @@
-# README
+# Dependencies
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Node v12.22.11
 
-Things you may want to cover:
+# How to run?
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Clone the repo
+* Compile assets
+```bash
+$ cd <app location>/frontend
+$ nvm use
+$ npm run bundle:dev
+```
+* Build docker image & run the app
+```bash
+ $ cd <app location>
+ $ docker build -t casmedia .
+ $ docker compose up -d
+```
