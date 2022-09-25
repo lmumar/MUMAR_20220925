@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Casmedia</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= include_main_css %>
+  </head>
+
+  <body class="bg-gray-100">
+    <%= yield %>
+    <%= include_js "locales_#{I18n.locale}" %>
+    <%= include_js 'videos' %>
+  </body>
+</html>
