@@ -1,5 +1,7 @@
 window.__translations = {
-  title: 'Title',
   category: 'Category',
+  selectFileTitle: 'Select file to upload',
+  submit: 'Submit',
+  title: 'Title',
   upload: 'Upload'
 }
