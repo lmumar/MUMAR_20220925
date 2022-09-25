@@ -10,16 +10,23 @@ enum UploadFormState {
   Ready,
   Saving,
   Saved,
-  Failed
+  ValidationFailed,
+  SavingFailed
 }
 
 type UploadFormReply =
   | ErrorReply
   | VideoEntity
 
+const fileSizeMax = 200 * 1024 * 1024
+function isFileSizeValid(file: File) {
+  return file.size <= fileSizeMax
+}
+
 export default function UploadForm() {
   const [categories, setCategories] = useState<CategoryEntity[]>([])
   const [formState, setFormState] = useState(UploadFormState.Ready)
+  const [errorDetails, setErrorDetails] = useState('')
 
   useEffect(() => {
     async function getCategories() {
@@ -32,7 +39,6 @@ export default function UploadForm() {
 
   const handleSubmit = (event: any) => {
     event.preventDefault()
-
     setFormState(UploadFormState.Saving)
 
     async function saveVideo(formData: FormData) {
@@ -48,7 +54,8 @@ export default function UploadForm() {
 
       const reply: UploadFormReply = await response.json()
       if ('code' in reply) {
-        setFormState(UploadFormState.Failed)
+        setFormState(UploadFormState.SavingFailed)
+        setErrorDetails(t('errorSavingVideoTip'))
         return
       }
 
@@ -62,6 +69,17 @@ export default function UploadForm() {
     saveVideo(formData)
   }
 
+  const handleFileChanged = (event: any) => {
+    const file = event.target.files[0]
+    if (file && !isFileSizeValid(file)) {
+      setFormState(UploadFormState.ValidationFailed)
+      setErrorDetails(t('fileSizeLimitExceeded'))
+    } else {
+      setFormState(UploadFormState.Ready)
+      setErrorDetails('')
+    }
+  }
+
   return (
     <div className="max-w-sm mx-auto border p-10 rounded-lg mt-10 bg-white">
       {formState === UploadFormState.Saved && (
@@ -72,9 +90,9 @@ export default function UploadForm() {
         </div>
       )}
 
-      {formState === UploadFormState.Failed && (
+      {(formState === UploadFormState.SavingFailed || formState === UploadFormState.ValidationFailed) && (
         <div className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
-          <span className="font-medium">{t('errorSavingVideo')}</span> {t('errorSavingVideoTip')}
+          <span className="font-medium">{t('errorSavingVideo')}</span> {errorDetails}
         </div>
       )}
 
@@ -114,11 +132,12 @@ export default function UploadForm() {
             type="file"
             className="border border-gray-300 rounded-lg text-sm bg-gray-50"
             accept="video/mp4, video/quicktime"
+            onChange={handleFileChanged}
             required
           />
         </div>
         <button
-          disabled={categories.length === 0}
+          disabled={categories.length === 0 || formState === UploadFormState.ValidationFailed}
           type="submit"
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
         >
