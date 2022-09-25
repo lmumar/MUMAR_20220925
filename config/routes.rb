@@ -12,4 +12,6 @@ Rails.application.routes.draw do
       resources :categories, only: %w[index]
     end
   end
+
+  get '*path', to: 'home#index'
 end
