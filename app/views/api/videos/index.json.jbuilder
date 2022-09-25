@@ -1,1 +1,1 @@
-json.array! Video.order_recent, partial: 'videos/video', as: :video
+json.array! Video.order_recent, partial: 'api/videos/video', as: :video

@@ -2,9 +2,9 @@ class ThumbnailGeneratorJob < ApplicationJob
   queue_as :default
 
   SIZES = {
-    small: 64,
-    medium: 128,
-    large: 256
+    small: '64x64',
+    medium: '128x128',
+    large: '256x256'
   }.freeze
 
   def perform(video)
@@ -13,7 +13,7 @@ class ThumbnailGeneratorJob < ApplicationJob
 
   def generate_thumbnail(video, ssize)
     size  = SIZES[ssize]
-    image = video.clip.preview(resize_to_limit: size).processed.image
+    image = video.clip.preview(resize: size).processed.image
     field = "thumbnail_#{ssize}=".to_sym
 
     thumbnail = VideoThumbnail.find_or_create_by(video_id: video.id)

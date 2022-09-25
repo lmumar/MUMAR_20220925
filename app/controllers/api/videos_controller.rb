@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class VideosController < ApplicationController
+class Api::VideosController < ApplicationController
   def create
     @video = Video.create(video_params)
 
