@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import VideoCard from '../VideoCard'
 
-type Props = {
-  children: JSX.Element[]
-}
+export default function VideoList() {
+  const [videos, setVideos] = useState([])
 
-export default function VideoList({ children } : Props) {
+  useEffect(() => {
+    async function getVideos() {
+      const response = await fetch('api/videos')
+      const data = await response.json()
+      setVideos(data)
+    }
+    getVideos()
+  }, [])
+
   return (
     <div className="container max-w-7xl flex items-center mx-auto mt-5">
       <div className="grid grid-flow-row grid-cols-4">
-        {children}
+        {videos.map((video: Playable) => <VideoCard video={video} key={video.id} />)}
       </div>
     </div>
   )

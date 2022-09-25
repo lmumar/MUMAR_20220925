@@ -3,7 +3,6 @@ import { useRoutes} from 'react-router-dom'
 
 import MainLayout from '../../components/MainLayout'
 import VideoList from '../../components/VideoList'
-import VideoCard from '../../components/VideoCard'
 import UploadForm from '../../components/UploadForm'
 
 export default function App() {
@@ -13,13 +12,7 @@ export default function App() {
     children: [
       {
         index: true,
-        element: (
-          <VideoList>
-            {Array.from(Array(10).keys()).map(_k => (
-              <VideoCard />
-            ))}
-          </VideoList>
-        )
+        element: <VideoList />
       },
       {
         path: 'videos/add',
