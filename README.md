@@ -9,6 +9,7 @@
 ```bash
 $ cd <app location>/frontend
 $ nvm use
+$ npm install
 $ npm run bundle:dev
 ```
 * Build docker image & run the app
