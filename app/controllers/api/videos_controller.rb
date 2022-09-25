@@ -2,7 +2,7 @@
 
 class Api::VideosController < ApplicationController
   def create
-    @video = Video.create(video_params)
+    @video = Video.create!(video_params)
 
     return unless @video.errors.present?
 

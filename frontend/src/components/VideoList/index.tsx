@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import VideoCard from '../VideoCard'
 
 export default function VideoList() {
-  const [videos, setVideos] = useState([])
+  const [videos, setVideos] = useState<VideoEntity[]>([])
 
   useEffect(() => {
     async function getVideos() {
