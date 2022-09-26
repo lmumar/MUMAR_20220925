@@ -18,3 +18,5 @@ $ npm run bundle:dev
  $ docker build -t casmedia .
  $ docker compose up
 ```
+
+Goto http://localhost:3000
